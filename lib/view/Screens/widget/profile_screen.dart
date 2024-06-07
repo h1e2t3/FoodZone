@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Model/container_list.dart';
 import '../../../Widgets/Common/radiobutton.dart';
@@ -23,7 +25,20 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   int foodindx = -1;
   File? _image;
+  String name = '';
+  getName()async{
+    SharedPreferences userName = await SharedPreferences.getInstance();
+    setState(() {
+      name = userName.getString("Username")!;
+    });
+  }
 
+  @override
+  void initState() {
+    getName();
+
+    super.initState();
+  }
   Future<void> _pickImage(ImageSource source) async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: source);
@@ -36,6 +51,7 @@ class _ProfileState extends State<Profile> {
       print('No image selected.');
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,13 +109,25 @@ class _ProfileState extends State<Profile> {
                               CircleAvatar(
                                 radius: 40,
                                 backgroundColor: Colors.blue.withOpacity(0.30),
-                                child: _image==null
-                                  ?Center(
-                                    child: CupertinoButton(
-                                      onPressed: ()=> _pickImage(ImageSource.camera),
-                                      child: Icon(CupertinoIcons.camera),
-                                    ))
-                                    :Image.file(_image!),
+                                child: _image == null
+                                    ? Center(
+                                        child: CupertinoButton(
+                                          onPressed: () =>
+                                              _pickImage(ImageSource.camera),
+                                          child:
+                                              const Icon(CupertinoIcons.camera),
+                                        ),
+                                      )
+                                    : ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(50),
+                                        child: Image.file(
+                                          _image!,
+                                          fit: BoxFit.cover,
+                                          height: 100,
+                                          width: 100,
+                                        ),
+                                      ),
                               ),
                               const SizedBox(
                                 width: 15,
@@ -109,8 +137,8 @@ class _ProfileState extends State<Profile> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    widget.name.toString(),
-                                    style: TextStyle(fontSize: 26),
+                                    name,
+                                    style: const TextStyle(fontSize: 26),
                                   ),
                                   SizedBox(
                                     height: Get.height / 20,
@@ -244,14 +272,14 @@ class _ProfileState extends State<Profile> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                   CupertinoButton(
                       color: Colors.orange,
-                      child: Text("Logout"),
+                      child: const Text("Logout"),
                       onPressed: () {
-                        Get.to(Login());
+                        Get.to(const Login());
                       })
                 ],
               ),

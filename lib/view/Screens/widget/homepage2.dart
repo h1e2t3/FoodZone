@@ -9,7 +9,7 @@ import '../tab_screens/All_foodtab.dart';
 import '../tab_screens/Nonved_foodtab.dart';
 import '../tab_screens/jain_foodtab.dart';
 import '../tab_screens/punjabi_foodtab.dart';
-import 'In _food_Screen.dart';
+
 import 'profile_screen.dart';
 import 'explore_list.dart';
 

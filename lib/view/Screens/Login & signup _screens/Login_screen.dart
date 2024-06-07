@@ -31,10 +31,11 @@ class _LoginState extends State<Login> {
 
     SharedPreferences uname = await SharedPreferences.getInstance();
 
-    uname.setString("Username", username.text);
-    usrname = uname.getString("Username")!;
+
+    // usrname = uname.getString("Username")!;
     setState(() {
       if (username.text.isEmpty || pass.text.isEmpty) {
+        uname.setString("Username", username.text);
         Get.defaultDialog(
           content: const Text("Please Fill All Fields"),
           title: "Oops",
@@ -56,12 +57,12 @@ class _LoginState extends State<Login> {
         alignment: Alignment.bottomCenter,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             height: Get.height,
             width: Get.width,
             color: Colors.orange,
             alignment: Alignment.topCenter,
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Icon(
@@ -78,8 +79,8 @@ class _LoginState extends State<Login> {
           Container(
             height: Get.height / 1.2,
             width: Get.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(24),
@@ -90,23 +91,23 @@ class _LoginState extends State<Login> {
               children: [
                 Container(
                   width: Get.width,
-                  child: Text(
+                  child: const Text(
                     "Let's got something",
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
                   width: Get.width,
-                  child: Text(
+                  child: const Text(
                     "Good to see you back.",
                     style: TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Container(
-                  padding: EdgeInsets.only(right: 100),
+                  padding: const EdgeInsets.only(right: 100),
                   width: Get.width,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,7 +117,7 @@ class _LoginState extends State<Login> {
                         width: Get.width / 7,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
-                            image: DecorationImage(
+                            image: const DecorationImage(
                                 image: NetworkImage(
                                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ75Q9EvClA_AXpsxkvrXrLRQS6iLAI-Y_MV9FKjZDSEw&s"),
                                 fit: BoxFit.cover)),
@@ -126,7 +127,7 @@ class _LoginState extends State<Login> {
                         width: Get.width / 7,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
-                            image: DecorationImage(
+                            image: const DecorationImage(
                                 image: NetworkImage(
                                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYrgjZVYT0sxSCRszjJuS3WQcAk8MPmHxntLon0awmKw&s"),
                                 fit: BoxFit.cover)),
@@ -136,7 +137,7 @@ class _LoginState extends State<Login> {
                         width: Get.width / 7,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
-                            image: DecorationImage(
+                            image: const DecorationImage(
                                 image: NetworkImage(
                                     "https://pbs.twimg.com/profile_images/1683507906891718658/ZS9jJfar_400x400.jpg"),
                                 fit: BoxFit.cover)),
@@ -144,14 +145,14 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 30),
+                  padding: const EdgeInsets.symmetric(vertical: 30),
                   child: TextField(
                     controller: username,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       prefixIcon: Icon(CupertinoIcons.person),
                       hintText: "Username",
                       enabledBorder: OutlineInputBorder(
@@ -166,21 +167,21 @@ class _LoginState extends State<Login> {
                     controller: pass,
                     obscureText: password,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(CupertinoIcons.lock),
+                      prefixIcon: const Icon(CupertinoIcons.lock),
                       suffixIcon: IconButton(
                           onPressed: Passwordtoggle,
                           icon: password
-                              ? Icon(CupertinoIcons.eye)
-                              : Icon(CupertinoIcons.eye_slash)),
+                              ? const Icon(CupertinoIcons.eye)
+                              : const Icon(CupertinoIcons.eye_slash)),
                       hintText: "Password",
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.orange)),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.orange)),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 CupertinoButton(
@@ -188,8 +189,8 @@ class _LoginState extends State<Login> {
                     onPressed: () async {
                       validation();
                     },
-                    child: Text("Login")),
-                SizedBox(
+                    child: const Text("Login")),
+                const SizedBox(
                   height: 40,
                 ),
                 Container(
@@ -197,14 +198,14 @@ class _LoginState extends State<Login> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Don't Have an account?  ",
                         style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
                       GestureDetector(onTap: (){
-                        Get.to(()=>Signup());
+                        Get.to(()=>const Signup());
                       },
-                        child: Text("Sign up",
+                        child: const Text("Sign up",
                             style: TextStyle(fontSize: 18, color: Colors.orange)),
                       ),
                     ],
